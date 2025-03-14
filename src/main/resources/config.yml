@@ -4,7 +4,7 @@
 # И короче lovemetal это сделал, пишите в дискорд если найдёте ошибки: verylovemetal
 
 settings:
-  server-after-captcha: "anarchy-1" # Название сервера, на который перекинет игрока после капчи
+  server-after-captcha: "lobby" # Название сервера, на который перекинет игрока после капчи
   session-time: 30 # Время сессии игрока в минутах, чтобы он не выполнял каждый раз капчу
   captcha-time: 120 # Сколько времени будет выделено игроку на капчу
   spawn-point: # Где появиться игрок при заходе
@@ -29,7 +29,7 @@ messages:
   player-connect-message: "Здравствуйте! Выполните задание, чтобы зайти на основной сервер: %task%"
   kick-message: "Вы не успели пройти капчу!"
 
-# типы капчи: CRAFT_ITEM, BREAK_BLOCK, PLACE_BLOCK, ENCHANT_ITEM, REMOVE_ENCHANT
+# типы капчи: CRAFT_ITEM, BREAK_BLOCK, ENCHANT_ITEM, REMOVE_ENCHANT
 tasks: # Тут задачи, которые выпадают на рандом игрок. Вы можете добавлять сколько угодно их
   task-craft:
     type: "CRAFT_ITEM" # Тип капчи, что нужно сделать для прохождения её
@@ -41,21 +41,18 @@ tasks: # Тут задачи, которые выпадают на рандом 
     boss-bar-color: "RED" # Цвет босс бара
   task-break-block:
     type: "BREAK_BLOCK"
-    block-type: "GRASS_BLOCK" # Тип блока, который нужно сломать чтобы выполнить капчу
+    block-type: "GRASS_BLOCK" # Тип блока, который нужно сломать, чтобы выполнить капчу
     amount-to-complete: 4
     task-name: "Сломайте 4 блока травы"
     boss-bar-color: "YELLOW"
-  task-place-block:
-    type: "PLACE_BLOCK"
-    amount-to-complete: 5
-    task-name: "Поставьте 5 раз блок на землю"
-    boss-bar-color: "GREEN"
   task-enchant-item:
     type: "ENCHANT_ITEM"
     amount-to-complete: 1
     task-name: "Зачаруйте предмет 1 раз"
     items-to-give:
       - "EXPERIENCE:100" # Можно указать вместо предмета EXPERIENCE и через : указать уровень, который выдать
+      - "LAPIS_LAZULI:64"
+      - "DIAMOND_AXE"
     boss-bar-color: "GREEN"
   task-remove-enchant:
     type: "REMOVE_ENCHANT"

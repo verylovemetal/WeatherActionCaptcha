@@ -30,7 +30,6 @@ public final class Main extends JavaPlugin {
                 new PlayerConnectListener(),
                 new CraftTaskListener(),
                 new BreakBlockListener(),
-                new PlaceBlockListener(),
                 new EnchantItemListener(),
                 new PlayerListener(),
                 new WorldListener(),

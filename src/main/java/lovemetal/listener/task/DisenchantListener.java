@@ -21,8 +21,6 @@ public class DisenchantListener implements Listener {
 
     @EventHandler
     public void onDisenchantItem(InventoryClickEvent event) {
-        event.setCancelled(true);
-
         Player player = (Player) event.getWhoClicked();
         UUID playerUUID = player.getUniqueId();
 

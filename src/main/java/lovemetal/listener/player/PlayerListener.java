@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -32,6 +33,7 @@ public class PlayerListener implements Listener {
         Material material = block.getType();
 
         if (material == Material.CRAFTING_TABLE || material == Material.ENCHANTING_TABLE || material == Material.GRINDSTONE) return;
+
         event.setCancelled(true);
     }
 
