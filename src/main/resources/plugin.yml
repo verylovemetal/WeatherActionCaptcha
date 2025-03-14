@@ -1,0 +1,4 @@
+name: WeatherActionCaptcha
+version: '${version}'
+main: lovemetal.Main
+api-version: '1.16.5'

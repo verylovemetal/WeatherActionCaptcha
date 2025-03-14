@@ -1,0 +1,66 @@
+# Для капчи нужен отдельный сервер, это будет работать вот так: Прокси > Капча > Лобби/Ваш основной сервер
+# Так что сделайте так, чтобы с прокси человека коннектило к капча серверу, оттуда уже будет на основной или же лобби
+#
+# И короче lovemetal это сделал, пишите в дискорд если найдёте ошибки: verylovemetal
+
+settings:
+  server-after-captcha: "anarchy-1" # Название сервера, на который перекинет игрока после капчи
+  session-time: 30 # Время сессии игрока в минутах, чтобы он не выполнял каждый раз капчу
+  captcha-time: 120 # Сколько времени будет выделено игроку на капчу
+  spawn-point: # Где появиться игрок при заходе
+    world: "world"
+    x-coord: 50
+    y-coord: 50
+    z-coord: 50
+  players-without-captcha:
+    - "PLAYER_WITHOUT_CAPTCHA" # Ник игроков, которым не нужно проходить капчу
+
+tab: # Настройки таба
+  header:
+    - "Вы находитесь в капче!"
+  footer:
+    - "Пройдите её, чтобы перейти на основной сервер"
+
+boss-bar-settings:
+  title: "&fВыполните задание: &a%task% &7(%amount%/%amount-to-complete%)"
+
+messages:
+  complete-captcha: "Вы выполнили капчу"
+  player-connect-message: "Здравствуйте! Выполните задание, чтобы зайти на основной сервер: %task%"
+  kick-message: "Вы не успели пройти капчу!"
+
+# типы капчи: CRAFT_ITEM, BREAK_BLOCK, PLACE_BLOCK, ENCHANT_ITEM, REMOVE_ENCHANT
+tasks: # Тут задачи, которые выпадают на рандом игрок. Вы можете добавлять сколько угодно их
+  task-craft:
+    type: "CRAFT_ITEM" # Тип капчи, что нужно сделать для прохождения её
+    result-item: "STICK" # Что должно получиться после крафта, чтобы выполнить екапчу
+    amount-to-complete: 1 # Сколько предметов нужно скрафтить, чтобы выполнить капчу
+    task-name: "Скрафтите 1 палку"
+    items-to-give: # Тут можно указать, что выдать игроку при заходе, как заполнять: "Тип_Предмета:Количество:Зачарование" Обязателен только Тип_Предмета, остальное опционально
+      - "OAK_PLANKS:64"
+    boss-bar-color: "RED" # Цвет босс бара
+  task-break-block:
+    type: "BREAK_BLOCK"
+    block-type: "GRASS_BLOCK" # Тип блока, который нужно сломать чтобы выполнить капчу
+    amount-to-complete: 4
+    task-name: "Сломайте 4 блока травы"
+    boss-bar-color: "YELLOW"
+  task-place-block:
+    type: "PLACE_BLOCK"
+    amount-to-complete: 5
+    task-name: "Поставьте 5 раз блок на землю"
+    boss-bar-color: "GREEN"
+  task-enchant-item:
+    type: "ENCHANT_ITEM"
+    amount-to-complete: 1
+    task-name: "Зачаруйте предмет 1 раз"
+    items-to-give:
+      - "EXPERIENCE:100" # Можно указать вместо предмета EXPERIENCE и через : указать уровень, который выдать
+    boss-bar-color: "GREEN"
+  task-remove-enchant:
+    type: "REMOVE_ENCHANT"
+    amount-to-complete: 1
+    task-name: "Снимите зачарование предмет 1 раз"
+    items-to-give:
+      - "DIAMOND_AXE:1:EFFICIENCY"
+    boss-bar-color: "GREEN"
