@@ -27,8 +27,8 @@ public class DisenchantListener implements Listener {
         if (event.getInventory().getType() != InventoryType.GRINDSTONE) return;
         ItemStack resultItem = event.getInventory().getItem(2);
 
-        if (event.getSlot() != 2 && event.getClick() != ClickType.LEFT) return;
-        if (resultItem == null || resultItem.getEnchantments().isEmpty()) return;
+        if (event.getSlot() != 2) return;
+        if (resultItem == null || !resultItem.getEnchantments().isEmpty()) return;
 
         TaskData taskData = PlayerTaskTracker.getInstance().getTask(playerUUID);
         if (taskData.getTaskType() != TaskType.REMOVE_ENCHANT) return;

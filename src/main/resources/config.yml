@@ -9,13 +9,31 @@ settings:
   captcha-time: 120 # Сколько времени будет выделено игроку на капчу
   spawn-point: # Где появиться игрок при заходе
     world: "world"
-    x-coord: 50
-    y-coord: 50
-    z-coord: 50
+    x-coord: 9
+    y-coord: -59
+    z-coord: 12
   players-without-captcha:
-    - "PLAYER_WITHOUT_CAPTCHA" # Ник игроков, которым не нужно проходить капчу
+    enable: false # Включить ли функцию, чтобы игроки с никами ниже не обязаны были проходить капчу
+    nick-names: # Ники игроков, которым не нужно проходить капчу
+      - "PLAYER_WITHOUT_CAPTCHA"
 
-tab: # Настройки таба
+proxy:
+  period-of-update: 3600 # Раз во сколько обновлять прокси, в секундах (Можете добавить или убрать url и ещё обновить внутри самого url, всё обновиться)
+  enable: false # Проверять ли запрещённые пркоси
+  url: # Здесь вы можете указать прокси, по ссылке, которые будут заблокированы для захода
+    - 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt'
+    - 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt'
+    - 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt'
+    - 'https://api.openproxylist.xyz/socks5.txt'
+    - 'https://api.openproxylist.xyz/socks4.txt'
+    - 'https://api.openproxylist.xyz/http.txt'
+    - 'https://tcpshield.com/blocklist.txt'
+    - 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/socks4.txt'
+    - 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/socks5.txt'
+    - 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt'
+    - 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt'
+
+tab-scoreboard: # Настройки таба
   header:
     - "Вы находитесь в капче!"
   footer:
@@ -25,6 +43,7 @@ boss-bar-settings:
   title: "&fВыполните задание: &a%task% &7(%amount%/%amount-to-complete%)"
 
 messages:
+  blocked-ip-join: "Ваш IP был запрещён, попробуйте перезагрузить роутер или же попросите помощи у администратора!"
   complete-captcha: "Вы выполнили капчу"
   player-connect-message: "Здравствуйте! Выполните задание, чтобы зайти на основной сервер: %task%"
   kick-message: "Вы не успели пройти капчу!"
@@ -34,16 +53,28 @@ tasks: # Тут задачи, которые выпадают на рандом 
   task-craft:
     type: "CRAFT_ITEM" # Тип капчи, что нужно сделать для прохождения её
     result-item: "STICK" # Что должно получиться после крафта, чтобы выполнить екапчу
-    amount-to-complete: 1 # Сколько предметов нужно скрафтить, чтобы выполнить капчу
-    task-name: "Скрафтите 1 палку"
+    amount-to-complete: 16 # Сколько предметов нужно скрафтить, чтобы выполнить капчу
+    task-name: "Скрафтите 16 палок"
     items-to-give: # Тут можно указать, что выдать игроку при заходе, как заполнять: "Тип_Предмета:Количество:Зачарование" Обязателен только Тип_Предмета, остальное опционально
       - "OAK_PLANKS:64"
     boss-bar-color: "RED" # Цвет босс бара
-  task-break-block:
+  task-break-block-1:
     type: "BREAK_BLOCK"
-    block-type: "GRASS_BLOCK" # Тип блока, который нужно сломать, чтобы выполнить капчу
+    block-type: "OAK_LOG" # Тип блока, который нужно сломать, чтобы выполнить капчу
     amount-to-complete: 4
-    task-name: "Сломайте 4 блока травы"
+    task-name: "Сломайте 4 дубовых бревна"
+    boss-bar-color: "YELLOW"
+  task-break-block-2:
+    type: "BREAK_BLOCK"
+    block-type: "COAL_ORE"
+    amount-to-complete: 3
+    task-name: "Добудьте 3 угля"
+    boss-bar-color: "YELLOW"
+  task-break-block-3:
+    type: "BREAK_BLOCK"
+    block-type: "DIAMOND_ORE"
+    amount-to-complete: 5
+    task-name: "Добудьте 5 алмазов"
     boss-bar-color: "YELLOW"
   task-enchant-item:
     type: "ENCHANT_ITEM"
@@ -57,7 +88,7 @@ tasks: # Тут задачи, которые выпадают на рандом 
   task-remove-enchant:
     type: "REMOVE_ENCHANT"
     amount-to-complete: 1
-    task-name: "Снимите зачарование предмет 1 раз"
+    task-name: "Снимите зачарование с предмета 1 раз"
     items-to-give:
       - "DIAMOND_AXE:1:EFFICIENCY"
     boss-bar-color: "GREEN"

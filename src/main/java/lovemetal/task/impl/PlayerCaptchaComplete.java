@@ -5,8 +5,8 @@ import lovemetal.Main;
 import lovemetal.session.SessionTracker;
 import lovemetal.task.ITaskAction;
 import lovemetal.tracker.PlayerTaskTracker;
-import lovemetal.utils.ChatUtils;
 import lovemetal.utils.ServerConnectUtils;
+import lovemetal.utils.StringBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -24,9 +24,8 @@ public class PlayerCaptchaComplete implements ITaskAction {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null) return;
 
-        player.sendMessage(ChatUtils.format(Main.getInstance().getConfig().getString("messages.complete-captcha")));
+        player.sendMessage(new StringBuilder(Main.getInstance().getConfig().getString("messages.complete-captcha")).getAsString());
 
         SessionTracker.getInstance().addSession(playerUUID, PlayerTaskTracker.getInstance().getTask(playerUUID));
-        ServerConnectUtils.connectPlayer(player);
     }
 }

@@ -3,8 +3,10 @@ package lovemetal;
 import lombok.Getter;
 import lovemetal.listener.player.PlayerConnectListener;
 import lovemetal.listener.player.PlayerListener;
+import lovemetal.listener.proxy.PlayerProxyListener;
 import lovemetal.listener.task.*;
 import lovemetal.listener.world.WorldListener;
+import lovemetal.utils.ProxyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +25,8 @@ public final class Main extends JavaPlugin {
 
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         registerListeners();
+
+        ProxyUtils.loadProxyList();
     }
 
     public void registerListeners() {
@@ -33,7 +37,8 @@ public final class Main extends JavaPlugin {
                 new EnchantItemListener(),
                 new PlayerListener(),
                 new WorldListener(),
-                new DisenchantListener()
+                new DisenchantListener(),
+                new PlayerProxyListener()
         ).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 }

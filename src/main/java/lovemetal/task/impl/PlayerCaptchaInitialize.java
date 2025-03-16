@@ -10,8 +10,7 @@ import lovemetal.scoreboard.TabScoreboard;
 import lovemetal.session.SessionTracker;
 import lovemetal.task.ITaskAction;
 import lovemetal.tracker.PlayerTaskTracker;
-import lovemetal.utils.ChatUtils;
-import lovemetal.utils.ServerConnectUtils;
+import lovemetal.utils.StringBuilder;
 import lovemetal.utils.TaskUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,16 +36,19 @@ public class PlayerCaptchaInitialize implements ITaskAction {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null) return;
 
-        for (String playerName : CONFIG.getStringList("settings.players-without-captcha")) {
-            if (player.getName().equalsIgnoreCase(playerName)) {
-                new PlayerTransferTask(playerUUID).runTaskTimer(Main.getInstance(), 0L, 20L);
-                return;
+        if (CONFIG.getBoolean("settings.players-without-captcha.enable")) {
+            for (String playerName : CONFIG.getStringList("settings.players-without-captcha.nick-names")) {
+                if (player.getName().equalsIgnoreCase(playerName)) {
+                    new PlayerTransferTask(playerUUID).runTaskTimer(Main.getInstance(), 0L, 20L);
+                    return;
+                }
             }
         }
 
         TabScoreboard.getInstance().setTabScoreboard(playerUUID);
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
             onlinePlayer.hidePlayer(Main.getInstance(), player);
+            player.hidePlayer(Main.getInstance(), onlinePlayer);
         });
 
         player.teleportAsync(new Location(
@@ -64,9 +66,9 @@ public class PlayerCaptchaInitialize implements ITaskAction {
         PlayerTaskTracker.getInstance().addPlayer(playerUUID, TaskUtils.createRandomTaskData(playerUUID));
         TaskData taskData = PlayerTaskTracker.getInstance().getTask(playerUUID);
 
-        player.sendMessage(ChatUtils.format(CONFIG.getString("messages.player-connect-message")
-                        .replaceAll("%task%", CONFIG.getString("tasks." + taskData.getTaskPath() + ".task-name"))
-        ));
+        player.sendMessage(new StringBuilder(CONFIG.getString("messages.player-connect-message")
+                .replaceAll("%task%", CONFIG.getString("tasks." + taskData.getTaskPath() + ".task-name"))
+        ).getAsString());
 
         playerGiveItem(player, taskData.getTaskPath());
         BossBarInitialize.getInstance().action(playerUUID);

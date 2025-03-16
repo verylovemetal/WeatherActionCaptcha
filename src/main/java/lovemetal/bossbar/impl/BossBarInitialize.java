@@ -6,7 +6,7 @@ import lovemetal.bossbar.BossBarTracker;
 import lovemetal.bossbar.IBossBar;
 import lovemetal.data.TaskData;
 import lovemetal.tracker.PlayerTaskTracker;
-import lovemetal.utils.ChatUtils;
+import lovemetal.utils.StringBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -33,7 +33,7 @@ public class BossBarInitialize implements IBossBar {
                 .replaceAll("%amount-to-complete%", taskData.getCompleteAmount() + "");
         BarColor color = BarColor.valueOf(Main.getInstance().getConfig().getString("tasks." + taskData.getTaskPath() + ".boss-bar-color"));
 
-        BossBar bossBar = Bukkit.createBossBar(ChatUtils.format(title), color, BarStyle.SOLID);
+        BossBar bossBar = Bukkit.createBossBar(new StringBuilder(title).getAsString(), color, BarStyle.SOLID);
         bossBar.setProgress(0.0f);
         bossBar.addPlayer(player);
 

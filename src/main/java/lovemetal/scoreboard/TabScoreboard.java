@@ -2,7 +2,7 @@ package lovemetal.scoreboard;
 
 import lombok.Getter;
 import lovemetal.Main;
-import lovemetal.utils.ChatUtils;
+import lovemetal.utils.StringBuilder;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,8 +23,8 @@ public class TabScoreboard {
         List<String> headerList = Main.getInstance().getConfig().getStringList("tab-scoreboard.header");
         List<String> footerList = Main.getInstance().getConfig().getStringList("tab-scoreboard.footer");
 
-        Component header = Component.text(ChatUtils.format(String.join("\n", headerList)));
-        Component footer = Component.text(ChatUtils.format(String.join("\n", footerList)));
+        Component header = new StringBuilder(String.join("\n", headerList)).getAsComponent();
+        Component footer = new StringBuilder(String.join("\n", footerList)).getAsComponent();
 
         player.sendPlayerListHeaderAndFooter(header, footer);
     }

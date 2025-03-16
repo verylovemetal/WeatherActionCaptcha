@@ -1,7 +1,7 @@
 package lovemetal.runnable;
 
 import lovemetal.Main;
-import lovemetal.utils.ChatUtils;
+import lovemetal.utils.StringBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -21,6 +21,6 @@ public class CaptchaKickTask extends BukkitRunnable {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null) return;
 
-        player.kickPlayer(ChatUtils.format(Main.getInstance().getConfig().getString("messages.kick-message")));
+        player.kick(new StringBuilder(Main.getInstance().getConfig().getString("messages.kick-message")).getAsComponent());
     }
 }

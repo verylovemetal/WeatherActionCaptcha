@@ -6,9 +6,8 @@ import lovemetal.bossbar.BossBarTracker;
 import lovemetal.bossbar.IBossBar;
 import lovemetal.data.TaskData;
 import lovemetal.tracker.PlayerTaskTracker;
-import lovemetal.utils.ChatUtils;
+import lovemetal.utils.StringBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
@@ -41,7 +40,7 @@ public class BossBarUpdate implements IBossBar {
         double progress = (double) numberOfCompletions / completeAmount;
         progress = Math.min(progress, 1.0);
 
-        bossBar.setTitle(ChatUtils.format(title));
+        bossBar.setTitle(new StringBuilder(title).getAsString());
         bossBar.setProgress(progress);
     }
 }
